@@ -5,3 +5,9 @@ class Blog(models.Model):
     date = models.DateField()
     image = models.ImageField(upload_to='images/')
     body = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.title
+
+    def summary(self):
+        return self.body[:100]

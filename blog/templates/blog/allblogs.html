@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
-    <title>Home | John Abercrombie</title>
+    <title>Blog | John Abercrombie</title>
 
     <script type="text/javascript" nonce="b45837b7809245358cd6618a51b" src="//local.adguard.org?ts=1587063061416&amp;type=content-script&amp;dmn=getbootstrap.com&amp;css=1&amp;js=1&amp;gcss=1&amp;rel=1&amp;rji=1"></script>
 <script type="text/javascript" nonce="b45837b7809245358cd6618a51b" src="//local.adguard.org?ts=1587063061416&amp;name=AdGuard%20Popup%20Blocker&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Extra&amp;type=user-script"></script><link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/album/">
@@ -43,11 +43,11 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home'%}">Home</a>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'allblogs' %}">Blog</a>
+            <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% static 'finalresume4.docx' %}">Resume</a>
@@ -72,38 +72,23 @@
 </header>
 
 <main role="main">
+  <div class="">
+    <h1 class="text-center pt-3">Blog</h1>
+    <br>
+    <br>
+    <h2>Latest Posts</h2>
+    <hr>
 
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>Hi I'm John</h1>
-      <p class="lead text-muted">And I like to party.</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2">Get to Know Me</a>
-      </p>
-      <img src="{% static 'license front.jpeg' %}" height=300 >
-    </div>
-  </section>
+    {% for blog in allblogs.all %}
+    <a href="{% url 'detail' blog.id %}"><h3>{{blog.title}}</h3></a>
+    {{blog.date}}
+    <br>
+    <img class="image-fluid" src="{{ blog.image.url }}" height=200px width=200px>
+    <br>
+    <p>{{blog.summary}}</p>
+    {% endfor %}
 
-  <div class="album py-5 bg-light">
-    <div class="container">
-
-      <div class="row">
-
-        {% for job in jobs.all %}
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img src="{{ job.image.url }}" height=250px>
-            <div class="card-body">
-              <p class="card-text">{{ job.summary }}</p>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-
-      </div>
-    </div>
   </div>
-
 </main>
 
 <footer class="text-muted">
